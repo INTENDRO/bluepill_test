@@ -30,12 +30,14 @@ Rebuild target 'Target 1'
 assembling startup_stm32f10x_md.s...
 compiling system_stm32f10x.c...
 compiling main.c...
-main.c(49): warning:  #1-D: last line of file ends without a newline
-  }
-main.c: 1 warning, 0 errors
+main.c(74): warning:  #128-D: loop is not reachable
+  	while(1)
+main.c(80): warning:  #128-D: loop is not reachable
+  	while(1)
+main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=860 RO-data=252 RW-data=0 ZI-data=1632  
-".\Objects\bluepill_test.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=880 RO-data=252 RW-data=0 ZI-data=1632  
+".\Objects\bluepill_test.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,11 +64,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.1.1
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\system_stm32f10x.c
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-Build Time Elapsed:  00:00:01
+      Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
