@@ -65,11 +65,11 @@ int main(void)
 	GPIOC->CRH = GPIO_CRH_MODE13_0;
 	GPIOC->ODR = GPIO_ODR_ODR13;
 	
-	INT_1ms_init();
-	__enable_irq();
+	//INT_1ms_init();
+	//__enable_irq();
 	
 	
-	while(1);
+	//while(1);
 	
 	while(1)
 	{
