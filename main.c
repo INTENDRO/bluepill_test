@@ -37,18 +37,20 @@ void INT_1ms_init(void)
 	TIM3->CCMR1 = 0x0000;
 	TIM3->CCMR2 = 0x0000;
 	TIM3->CCER = 0x0000;
-	TIM3->PSC = 7999;
-	TIM3->ARR = 999;
-    TIM3->CNT = 0;
+	TIM3->PSC = 7199;
+	TIM3->ARR = 9999;
+  TIM3->CNT = 0;
 	TIM3->DIER = TIM_DIER_UIE;
-	TIM3->SR &= ~TIM_SR_UIF;
 	TIM3->EGR = TIM_EGR_UG;
-	
+	TIM3->SR &= ~TIM_SR_UIF;
 	//enable int 29 
 	//NVIC_ClearPendingIRQ(TIM3_IRQn);
 	//NVIC_EnableIRQ(TIM3_IRQn);
-    NVIC->ICPR[0] = NVIC_ICPR_CLRPEND_29;
-    NVIC->ISER[0] = NVIC_ISER_SETENA_29;
+  //NVIC->ICPR[0] = NVIC_ICPR_CLRPEND_29;
+  //NVIC->ISER[0] = NVIC_ISER_SETENA_29;
+	
+	NVIC_ClearPendingIRQ(TIM3_IRQn);
+	NVIC_EnableIRQ(TIM3_IRQn);
 	
 	TIM3->CR1 |= TIM_CR1_CEN;
 }
@@ -56,8 +58,8 @@ void INT_1ms_init(void)
 void TIM3_IRQHandler(void)
 {
 	GPIOC->ODR ^= GPIO_ODR_ODR13;
-	NVIC->ICPR[0] = NVIC_ICPR_CLRPEND_29;
-    __disable_irq();
+	TIM3->SR &= ~TIM_SR_UIF;
+	NVIC_ClearPendingIRQ(TIM3_IRQn);
 }
 
 int main(void)
@@ -69,9 +71,10 @@ int main(void)
 	GPIOC->CRH = GPIO_CRH_MODE13_0;
 	GPIOC->ODR = GPIO_ODR_ODR13;
 	
+	__disable_irq();
+	
 	INT_1ms_init();
-	//__enable_irq();
-    //__disable_irq(); 
+	__enable_irq();
     
 	
 	while(1);
