@@ -30,14 +30,16 @@ Rebuild target 'Target 1'
 assembling startup_stm32f10x_md.s...
 compiling system_stm32f10x.c...
 compiling main.c...
-main.c(82): warning:  #128-D: loop is not reachable
+main.c(79): warning:  #128-D: loop is not reachable
   	while(1)
-main.c(88): warning:  #128-D: loop is not reachable
+main.c(85): warning:  #128-D: loop is not reachable
   	while(1)
-main.c: 2 warnings, 0 errors
+main.c(65): warning:  #177-D: variable "u32Temp"  was declared but never referenced
+  	uint32_t u32Temp;
+main.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=860 RO-data=252 RW-data=0 ZI-data=1632  
-".\Objects\bluepill_test.axf" - 0 Error(s), 2 Warning(s).
+Program Size: Code=840 RO-data=252 RW-data=0 ZI-data=1632  
+".\Objects\bluepill_test.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,10 +64,10 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
-      Source file:   Device\Source\system_stm32f10x.c
-      Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\system_stm32f10x.c
 
    * Component: ARM::CMSIS:CORE:5.1.1
 Build Time Elapsed:  00:00:01

@@ -37,9 +37,9 @@ void INT_1ms_init(void)
 	TIM3->CCMR1 = 0x0000;
 	TIM3->CCMR2 = 0x0000;
 	TIM3->CCER = 0x0000;
-	TIM3->PSC = 1;
-	TIM3->ARR = 35999;
-    TIM3->CNT = 1;
+	TIM3->PSC = 7999;
+	TIM3->ARR = 999;
+    TIM3->CNT = 0;
 	TIM3->DIER = TIM_DIER_UIE;
 	TIM3->SR &= ~TIM_SR_UIF;
 	TIM3->EGR = TIM_EGR_UG;
@@ -56,12 +56,13 @@ void INT_1ms_init(void)
 void TIM3_IRQHandler(void)
 {
 	GPIOC->ODR ^= GPIO_ODR_ODR13;
-	NVIC_ClearPendingIRQ(TIM3_IRQn);
+	NVIC->ICPR[0] = NVIC_ICPR_CLRPEND_29;
+    __disable_irq();
 }
 
 int main(void)
 {
-	SystemInit();
+	uint32_t u32Temp;
 	
 	RCC->APB2ENR = RCC_APB2ENR_IOPCEN;
 	
@@ -70,7 +71,7 @@ int main(void)
 	
 	INT_1ms_init();
 	//__enable_irq();
-    //__disable_irq();
+    //__disable_irq(); 
     
 	
 	while(1);
